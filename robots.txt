@@ -1,0 +1,4 @@
+# robots.txt for https://mirrors.sustech.edu.cn
+User-agent: *
+
+Disallow: /logs
