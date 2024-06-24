@@ -33,14 +33,14 @@ chmod a+x ~/bin/repo
 
 由于首次同步需要下载约 95GB 数据，过程中任何网络故障都可能造成同步失败，我们强烈建议您使用初始化包进行初始化。
 
-下载 https://mirrors.tuna.tsinghua.edu.cn/aosp-monthly/aosp-latest.tar，下载完成后记得根据 checksum.txt 的内容校验一下。
+下载 https://mirrors.sustech.edu.cn/aosp-monthly/aosp-latest.tar，下载完成后记得根据 checksum.txt 的内容校验一下。
 
 由于所有代码都是从隐藏的 `.repo` 目录中 checkout 出来的，所以我们只保留了 `.repo` 目录，下载后解压 再 `repo sync` 一遍即可得到完整的目录。
 
 使用方法如下:
 
 ```bash
-wget -c https://mirrors.tuna.tsinghua.edu.cn/aosp-monthly/aosp-latest.tar # 下载初始化包
+wget -c https://mirrors.sustech.edu.cn/aosp-monthly/aosp-latest.tar # 下载初始化包
 tar xf aosp-latest.tar
 cd AOSP   # 解压得到的 AOSP 工程目录
 # 这时 ls 的话什么也看不到，因为只有一个隐藏的 .repo 目录
@@ -70,13 +70,33 @@ repo init -u https://mirrors.sustech.edu.cn/AOSP/platform/manifest
 如果需要某个特定的 Android 版本([列表](https://source.android.com/setup/start/build-numbers#source-code-tags-and-builds))：
 
 ```bash
-repo init -u https://mirrors.sustech.edu.cn/AOSP/platform/manifest/AOSP/platform/manifest -b android-4.0.1_r1
+repo init -u https://mirrors.sustech.edu.cn/AOSP/platform/manifest -b android-4.0.1_r1
 ```
 
 同步源码树（以后只需执行这条命令来同步）：
 
 ```bash
 repo sync
+```
+
+### 替换已有的 AOSP 源代码的 remote
+
+如果你之前已经通过某种途径获得了 AOSP 的源码(或者你只是 init 这一步完成后)， 你希望以后通过 TUNA 同步 AOSP 部分的代码，只需要修改 `.repo/manifests.git/config`，将
+
+```
+url = https://android.googlesource.com/platform/manifest
+```
+
+更改为
+
+```
+url = https://mirrors.sustech.edu.cn/AOSP/platform/manifest
+```
+
+或者可以不修改文件，而执行
+
+```
+git config --global url.https://mirrors.sustech.edu.cn/AOSP/.insteadof https://android.googlesource.com
 ```
 
 ### 建立次级镜像
@@ -103,25 +123,6 @@ repo sync
 
 此后，其他用户使用 `git://ip.to.mirror/` 作为镜像即可。
 
-### 替换已有的 AOSP 源代码的 remote
-
-如果你之前已经通过某种途径获得了 AOSP 的源码(或者你只是 init 这一步完成后)， 你希望以后通过 TUNA 同步 AOSP 部分的代码，只需要修改 `.repo/manifests.git/config`，将
-
-```
-url = https://android.googlesource.com/platform/manifest
-```
-
-更改为
-
-```
-url = https://mirrors.sustech.edu.cn/AOSP/platform/manifest
-```
-
-或者可以不修改文件，而执行
-
-```
-git config --global url.https://mirrors.sustech.edu.cn/AOSP/.insteadof https://android.googlesource.com
-```
 
 ### FAQ
 
