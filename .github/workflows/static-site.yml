@@ -31,12 +31,12 @@ jobs:
         echo "yarn version `yarn --version`"
         echo "node version `node -v`"
 
-    - name: Cache dependencies
-      uses: actions/cache@v2
-      with:
-        path: ~/.npm
-        key: npm-${{ hashFiles('package-lock.json') }}
-        restore-keys: npm-
+    # - name: Cache dependencies
+    #   uses: actions/cache@v2
+    #   with:
+    #     path: ~/.npm
+    #     key: npm-${{ hashFiles('package-lock.json') }}
+    #     restore-keys: npm-
 
     - name: Install Dependencies
       run: yarn install
