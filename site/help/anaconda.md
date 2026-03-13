@@ -24,7 +24,11 @@ Then a configuration file named `.condarc` will be created. And you can manually
 
 ``` toml
 channels:
-  - defaults
+  - conda-forge
+  - bioconda
+  - pytorch
+  - nvidia
+  - nodefaults
 show_channel_urls: true
 default_channels:
   - https://mirrors.sustech.edu.cn/anaconda/pkgs/main
